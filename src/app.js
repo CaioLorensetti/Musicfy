@@ -18,6 +18,15 @@ app.get('/playlists', (request, response) => {
 
 })
 
-app.listen(port, () => {
-  console.log(`App listening...`)
+app.get('/playlists-test', (request, response) => {
+
+  database.getAllPlaylists(function (data) {
+    response.json(data)
+  })
+
 })
+
+app.listen(port, () => {
+})
+
+module.exports = app;

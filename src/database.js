@@ -7,13 +7,7 @@ const connection = mysql.createConnection({
     password: 'musicfy_1234'
 })
 
-connection.connect(function (error) {
-    if (error) {
-        throw error;
-    } else {
-        console.log(`MySql conectado com sucesso.`)
-    }
-})
+connection.on('error', function() {})
 
 connection.getAllPlaylists = (callback) => {
     var query = 
@@ -30,17 +24,18 @@ connection.getAllPlaylists = (callback) => {
         left join Album a on a.AlbumId = t.AlbumId
         left join Artist ar on ar.ArtistId = a.ArtistId
         left join Genre g on g.GenreId = t.GenreId`
-
+    
     connection.query(query, function(error, data){
-		if(error)
-		{
-			throw error; 
-		}
-		else
-		{
-			return callback(data);
-		}
-	})
+        if(error)
+        {
+            throw error; 
+        }
+        else
+        {
+            return callback(data);
+        }
+    })
+
 }
 
 module.exports = connection;
