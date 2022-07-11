@@ -7,9 +7,11 @@ const port = 3000
 
 
 app.get('/playlists', (request, response) => {
-  
-  const a = [{'teste':1}];
-  response.json(a)
+
+  database.getAllPlaylists(function (data) {
+    response.json(data)  
+  })
+
 })
 
 app.listen(port, () => {
