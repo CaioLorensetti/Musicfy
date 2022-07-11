@@ -6,7 +6,9 @@ const app = express()
 const port = 3000
 
 
-app.get('/playlists', (request, response) => {
+app.get('/playlists_csv', (request, response) => {
+
+  console.log(' Musicfy playlists_csv')
 
   database.getAllPlaylists(function (data) {
     const fields = Object.keys(data[0])
@@ -14,6 +16,16 @@ app.get('/playlists', (request, response) => {
     const csv = parser.parse(data)
     response.attachment('playlists.csv')
     response.status(200).send(csv)
+  })
+
+})
+
+app.get('/playlists', (request, response) => {
+
+  console.log(' Musicfy playlists')
+
+  database.getAllPlaylists(function (data) {
+    response.json(data)
   })
 
 })
